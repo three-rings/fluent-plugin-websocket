@@ -14,6 +14,7 @@
 
 require 'em-websocket'
 require 'thread'
+require 'yajl'
 
 module Fluent
   $lock = Mutex::new
@@ -72,7 +73,7 @@ module Fluent
         data = [record]
         if (@add_time) then data.unshift(time) end
         if (@add_tag) then data.unshift(tag) end
-        output = @use_msgpack ? data.to_msgpack : data.to_json
+        output = @use_msgpack ? data.to_msgpack : Yajl::Encoder.encode( data )
         $lock.synchronize do
           $channel.push output
         end
