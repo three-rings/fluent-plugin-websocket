@@ -22,4 +22,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "msgpack"
   gem.add_runtime_dependency "fluentd"
   gem.add_runtime_dependency "em-websocket"
+  gem.add_runtime_dependency "yajl"
 end
